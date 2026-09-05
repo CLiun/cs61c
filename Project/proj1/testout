@@ -1,0 +1,5 @@
+gcc -g -Wall -std=c99 -c imageloader.c
+gcc -g -Wall -o imageloadertester imageloader.o imageloadertester.o
+echo "Running imageloadertest"
+Running imageloadertest
+./imageloadertester testInputs/JohnConway.ppm > studentOutputs/JohnConway.ppm
