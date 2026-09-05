@@ -1,5 +1,7 @@
-6.test for merge conflict
-5.modify from local machine
+8.test for merge conflict
+7.modify from local machine
+6.msg from wsl machine
+5.merge test
 1.find
 2.top
 3.kill
