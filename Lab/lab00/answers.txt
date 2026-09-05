@@ -1,3 +1,5 @@
+6.test for merge conflict
+5.modify from local machine
 1.find
 2.top
 3.kill
