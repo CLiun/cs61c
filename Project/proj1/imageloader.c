@@ -96,5 +96,6 @@ void freeImage(Image *image)
 	for (int r = 0; r < image->rows; r++) {
 		free(image->image[r]);
 	}
+	free(image->image);
 	free(image);
 }

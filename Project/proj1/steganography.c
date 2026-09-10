@@ -22,12 +22,46 @@
 Color *evaluateOnePixel(Image *image, int row, int col)
 {
 	//YOUR CODE HERE
+	Color *pixel = (Color *) malloc(sizeof(*pixel));
+	pixel->R = image->image[row][col].R;
+	pixel->G = image->image[row][col].G;
+	pixel->B = image->image[row][col].B;
+	return pixel;
 }
 
 //Given an image, creates a new image extracting the LSB of the B channel.
 Image *steganography(Image *image)
 {
 	//YOUR CODE HERE
+	Image *secret = malloc(sizeof(Image));
+	if (secret == NULL) {
+		exit(EXIT_FAILURE);
+	}
+	int row = image->rows;
+	int col = image->cols;
+	secret->rows = row;
+	secret->cols = col;
+	secret->image = (Color **) malloc(sizeof(Color *) * row);
+	if (secret->image == NULL) {
+		exit(EXIT_FAILURE);
+	}
+
+	for (int i = 0; i < row; i++) {
+		secret->image[i] = (Color *) malloc(sizeof(Color) * col);
+		if (secret->image[i] == NULL) {
+			exit(EXIT_FAILURE);
+		}
+		for (int j = 0; j < col; j++) {
+			Color *pixel = evaluateOnePixel(image, i, j);
+			secret->image[i][j] = *pixel;
+			int LMB = (pixel->B) & 1;	
+			secret->image[i][j].R = (LMB == 1) ? 255 : 0;
+			secret->image[i][j].G = (LMB == 1) ? 255 : 0;
+			secret->image[i][j].B = (LMB == 1) ? 255 : 0;
+			free(pixel);
+		}	
+	}
+	return secret;
 }
 
 /*
@@ -46,4 +80,13 @@ Make sure to free all memory before returning!
 int main(int argc, char **argv)
 {
 	//YOUR CODE HERE
+	if (argc != 2) {
+		fprintf(stderr, "Usage: ./func ppm.\n");
+		exit(EXIT_FAILURE);
+	}
+	Image *input = readData(argv[1]);
+	Image *secret = steganography(input);
+	writeData(secret);
+	freeImage(secret);
+	freeImage(input);
 }
