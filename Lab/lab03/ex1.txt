@@ -1,0 +1,6 @@
+.word: store n 32-bit value in successive memory words.
+.data: subsequent items put in user data segment(source file data in binary)
+.text: subsequent items put in user text segment(machine code)
+
+output: 34. 9th fibonacci number.
+lw t3 0(t3)  # we can find address of n is 0x10000010 

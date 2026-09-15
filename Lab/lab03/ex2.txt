@@ -1,0 +1,11 @@
+The register representing the variable k.
+	t0
+The register representing the variable sum.
+	s0
+The registers acting as pointers to the source and dest arrays.
+	s1 for source
+	s2 for dest
+The assembly code for the loop found in the C code.
+	
+How the pointers are manipulated in the assembly code.
+	calculate the offset and add it to base address, using the address in lw, sw instruction to manipulate the pointer.
